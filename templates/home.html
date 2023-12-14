@@ -1,0 +1,60 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+
+<section>
+    <div style="background-color: #EDF2FA;">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-6">
+                    <h1 class="fw-bold">Chose Your Favourite Car</h1>
+                    <p> Unveil a world of unparalleled sophistication and performance with our latest lineup of cutting-edge vehicles. From sleek sedans to powerful SUVs, our collection embodies the perfect fusion of design, innovation, and driving pleasure. Elevate your journey with state-of-the-art technology, luxurious interiors, and dynamic features that redefine the driving experience. Explore the road ahead with confidence, style, and the unwavering commitment to excellence. Your automotive journey begins here – where every drive becomes a thrilling adventure. Welcome to a new era of automotive brilliance.</p>
+                </div>
+                <div class="col-6">
+                    <img class="w-100" src="{% static "images/banner_img.png" %}" alt="">
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container my-5">
+        <h4 class="fw-semibold mb-4">Top Car Brands</h4>
+        <div class="d-flex flex-wrap gap-4 justify-content-between">
+            {% for brd in brand %}
+            <a class="text-decoration-none text-dark"  href="{% url "brand_slug" brd.slug %}">
+                <div class="text-center py-2 fs-5 fw-semibold" style="background-color: #DCDEDE; width:300px;">
+                    {{brd.name}}
+            </div>
+            </a>
+            {% endfor %}
+        </div>
+    </div>
+    
+    <div class="container mb-5">
+        <small>Total Car Found {{ data | length }}</small>
+    
+        <div class="row align-self-end pt-3 row-gap-4">
+          {% for car in data %}
+         
+       <div class="col-sm-6 mb-3 mb-sm-0">
+            <div class="card border-0 rounded-0 shadow">
+              <div class="p-3">
+                <div class="d-flex">
+                  <div>
+                    <img style="width:250px; height:180px; object-fit: contain;" src="{{car.image.url}}" alt="Car Image">
+                  </div>
+                  <div class="ps-3">
+                    <h5 class="card-title">{{car.title}}</h5>
+                    <p class="card-text">{{car.description | truncatewords:20 }}</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+    
+          {% endfor %}
+        </div>
+      </div>
+</section>
+
+{% endblock content %}
