@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="container">
+    <div class="pt-5">
+        <a class="btn btn-dark px-5" href="{% url "update_profile" %}">Update Profile</a>
+    </div>
+    <h1 class="text-center py-4">Perchase History</h1>
+    {% for car in data %}
+      <div class="mb-3">
+        <div class="card border-0 rounded-0 shadow">
+        <div class="p-4">
+          <div class="d-flex">
+            <div>
+                <img style="width:350px; height:250px; object-fit: contain;" src="{{car.image.url}}" alt="Car Image">
+            </div>
+            <div class="ps-4">
+                <h5 class="card-title">{{car.title}}</h5>
+                <h6>Price : ${{car.price}}</h6>
+                <h6>Brand : {{car.brand.name}}</h6>
+                {% for key, value in count.items %}
+                    {% if key|add:"0" == car.id %}
+                        <h5>Perchase Quantity : {{value}} Car</h5>
+                    {% endif %}
+                {% endfor %}
+                <p class="card-text"><span class="fw-semibold">Details :</span> {{car.description}}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+  </div>
+  {% endfor %}
+</div>
+
+{% endblock content %}
